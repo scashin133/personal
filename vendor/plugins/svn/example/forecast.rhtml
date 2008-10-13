@@ -1,0 +1,26 @@
+
+<table>
+    <thead>
+		<tr>
+			<% for d in @forecasts.first -%>
+			<th><%= d.date.strftime('%a') %></th>
+			<% end -%>
+		</tr>
+    </thead>
+    <tbody>
+		<% for f in @forecasts -%>
+		<tr>
+            <th colspan="<%= f.entries.size %>"><%= f.location_city %></th>
+            <!-- LATEST UPDATE: <%= f.latest_update %> -->
+		</tr>
+		<tr>
+			<% for d in f -%>
+			<td>
+			    <%= image_tag("weather_32/"+d.icon.to_s+".png", {:alt => d.outlook, :title => outlook_tooltip(d)}) %>
+			    <br /><%= d.temp.nil? ? "N/A" : d.temp.to_s+"&deg;" %>
+			</td>
+			<% end -%>
+		</tr>
+		<% end -%>
+	</tbody>
+</table>
