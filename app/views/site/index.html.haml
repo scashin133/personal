@@ -4,29 +4,27 @@
 
 %p ....or is it?!?!?
 
-%p="Just in case you were wondering your IP is: #{@user_ip_address.blank? ? "<b>No idea, sorry</b>" : @user_ip_address}"
-
-- if @unmapped
+-form_tag "/" do
+  =label_tag 'address', "Give me your city, state or zipcode and i'll give ya something back: "
+  =text_field_tag 'address', params[:address]
+  =submit_tag "Submit"
+- if params[:address]
+  %p=h"Just in case you were wondering you just entered: #{@address}"
   
-  %p="Sorry, but your IP isn't mapped so here's my weather -- #{@forecasts.location_name} 5 day weather forecast according to #{link_to("weather.com", "http://weather.com", :target => "_blank")} is:"
-- else
-  %p="#{@forecasts.location_name} (hopefully your local) 5 day weather forecast according to #{link_to("weather.com", "http://weather.com", :target => "_blank")} is:"
+  - if !@weather_locations.blank?
+    %p="#{@forecasts.location_name} 5 day weather forecast according to #{link_to("weather.com", "http://weather.com", :target => "_blank")} is:"
 
-%table
-  %tr
-    %th Day
-    %th Temperature
-    %th Wind Speed & Heading
-    %th Outlook
-  -5.times do |i|
-    %tr
-      %td=i.days.from_now.to_s(:weather)
-      %td=(if i==0 then @forecasts.current.temperature else @forecasts.day(i).temperature end)
-      %td=(if i==0 then "#{@forecasts.current.wind.speed} #{@forecasts.current.wind.heading}" else "#{@forecasts.day(i).wind.speed} #{@forecasts.day(i).wind.heading}" end)
-      %td=(if i==0 then @forecasts.current.outlook else @forecasts.day(i).outlook end)
-
- 
-/ puts "Tomorrow's High: %s" % forecast.tomorrow.high
-/ puts "Tomorrow's Outlook: %s" % forecast.tomorrow.outlook
-/ puts "Tomorrow's Wind Direction: %s" % forecast.tomorrow.wind.direction
-  
+    %table
+      %tr
+        %th Day
+        %th Temperature
+        %th Wind Speed & Heading
+        %th Outlook
+      -5.times do |i|
+        %tr
+          %td=i.days.from_now.to_s(:weather)
+          %td=(if i==0 then @forecasts.current.temperature else @forecasts.day(i).temperature end)
+          %td=(if i==0 then "#{@forecasts.current.wind.speed} #{@forecasts.current.wind.heading}" else "#{@forecasts.day(i).wind.speed} #{@forecasts.day(i).wind.heading}" end)
+          %td=(if i==0 then @forecasts.current.outlook else @forecasts.day(i).outlook end)
+  -else
+    %p Sorry couldn't find any weather forecasts for what you entered.
