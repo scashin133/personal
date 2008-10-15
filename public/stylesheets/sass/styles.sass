@@ -1,0 +1,48 @@
+!page_width = 800px
+!anchor_color = blue
+
+*
+  :color = inherit
+  :font = inherit
+  :margin = 0
+  :padding = 0
+  :list-style = 0
+  :text-decoration = none
+
+body
+  :margin = 50px 0px
+  :text-align = center
+  
+  h1
+    :font
+      :size = 1.8em
+    :margin = 0 0 10px 0
+  
+  p
+    :margin = 10px 0
+    
+  a
+    :color = !anchor_color
+    &:hover
+      :text-decoration = underline
+  
+  #content
+    :width = !page_width
+    :margin = 0px auto
+    :text-align left
+    :padding 15px
+    :background-color #eee
+    
+  table.weather
+    :text-align = center
+    :width = 750px
+    :margin = 0 auto
+    :border = 1px solid black
+    td
+      :border = 1px solid black
+      :padding = 5px
+    th
+      :border = 1px solid black
+      :font
+        :size = 1.1em
+        :weight = bold
