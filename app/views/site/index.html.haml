@@ -2,33 +2,9 @@
 
 %p This page will eventually be replaced with a genuine rails app.  Until than all I got is this sweet static page....or is it?!?!?
 
--form_tag "/" do
+-form_remote_tag :url => "/site/find_address", :update => "weather_information" do
   =label_tag 'address', "Give me your city, state or zipcode and i'll give ya something back: "
   =text_field_tag 'address', params[:address]
   =submit_tag "Submit"
-- if params[:address]
-  
-  - if !@weather_locations.blank?
-    %p="#{@forecasts.location_name} 5 day weather forecast according to #{link_to("weather.com", "http://weather.com", :target => "_blank")} is:"
 
-    %table.weather{:cellpadding => 0, :cellspacing => 0}
-      %tr
-        %th Day
-        %th Temperature
-        %th Wind Speed & Heading
-        %th Outlook
-      -5.times do |i|
-        %tr
-          %td=i.days.from_now.to_s(:weather)
-          %td=(if i==0 then @forecasts.current.temperature else @forecasts.day(i).temperature end)
-          %td=(if i==0 then "#{@forecasts.current.wind.speed} #{@forecasts.current.wind.heading}" else "#{@forecasts.day(i).wind.speed} #{@forecasts.day(i).wind.heading}" end)
-          %td
-            - if i == 0
-              =@forecasts.current.outlook
-              =image_tag("/images/weather/#{@forecasts.current.icon}.png")
-            - else
-              =@forecasts.day(i).outlook
-              =image_tag("/images/weather/#{@forecasts.day(i).icon}.png")
-            
-  -else
-    %p Sorry couldn't find any weather forecasts for what you entered.
+#weather_information
