@@ -15,5 +15,3 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
-
-GeoKit::Geocoders::google = 'ABQIAAAATqLi3z9f97xP6wJ_R6yJNRTJQa0g3IQ9GZqIMmInSLzwtGDKaBSoSAsmsk6o0SCCy-5DM3JmwP8hGw'
